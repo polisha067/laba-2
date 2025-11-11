@@ -1,8 +1,8 @@
 #команда вывдит содержимое файла
 
 from pathlib import Path
-from const import *
-from loggg import *
+from const import FILE_ENCOD
+from loggg import zapisat_fold, zapisat_log
 
 def cat_komanda(argumenty):
 

@@ -3,8 +3,8 @@
 import os 
 import shutil
 from pathlib import Path
-from loggg import *
-from const import *
+from loggg import zapisat_fold, zapisat_log, zapisat_predosterezhenie
+from const import FORBID_RATHS
 
 def rm_komanda(argumenty):
 

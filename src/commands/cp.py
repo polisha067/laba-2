@@ -3,7 +3,7 @@
 import os
 import shutil
 from pathlib import Path
-from loggg import  *
+from loggg import  zapisat_fold, zapisat_log
 
 def cp_komanda(argumenty):
     if len(argumenty) < 2:

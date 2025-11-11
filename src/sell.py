@@ -2,7 +2,7 @@
 
 import os 
 from pathlib import Path
-from loggg import *
+from loggg import zapisat_predosterezhenie,zapisat_log,zapisat_fold
 from commands import KOMANDY
 
 def zapustit_obolochku():

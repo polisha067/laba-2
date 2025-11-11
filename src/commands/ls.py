@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from datetime import datetime
-from loggg import *
+from loggg import zapisat_fold, zapisat_log
 
 #команда показвыает список файлов и папок в указанной дериктории
 def ls_komanda(argumenty):

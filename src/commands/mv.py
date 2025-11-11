@@ -2,7 +2,7 @@
 
 import shutil
 from pathlib import Path
-from loggg import *
+from loggg import zapisat_fold, zapisat_log
 
 def mv_komanda(argumenty):
 

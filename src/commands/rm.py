@@ -53,19 +53,18 @@ def rm_komanda(argumenty):
             # удаляем директорию рекурсивно
             shutil.rmtree(put)
             
-        elif put.is_file():
-            # если это файл, удаляем без подтверждения
-            os.remove(put)
-            
         else:
-
-            soobsh = f"rm: {put_str}: неизвестный тип объекта"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
+            #если это файл удаляем без подтверждения
+            os.remove(put)
         
         # логируем выполнение
         zapisat_log(f"rm {put_str}")
+    
+    except FileNotFoundError:
+        
+        soobsh = f"rm: {put_str}: нет такого файла или каталога"
+        print(soobsh)
+        zapisat_fold(soobsh)
         
     except PermissionError:
 
@@ -78,3 +77,5 @@ def rm_komanda(argumenty):
         soobsh = f"rm: {put_str}: {e}"
         print(soobsh)
         zapisat_fold(soobsh)
+    
+

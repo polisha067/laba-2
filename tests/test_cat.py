@@ -3,7 +3,7 @@
 import sys
 from pathlib import Path
 import tempfile
-from commands.cat import *
+from src.commands.cat import cat_komanda
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 

@@ -3,8 +3,8 @@
 import os
 import sys
 from pathlib import Path
-from loggg import *
-from const import *
+from src.loggg import zapisat_fold,zapisat_log,zapisat_predosterezhenie
+from src.const import LOG_FILE
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 

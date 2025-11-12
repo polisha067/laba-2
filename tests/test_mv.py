@@ -3,7 +3,7 @@
 import tempfile
 from pathlib import Path
 import sys
-from commands.mv import *
+from src.commands.mv import mv_komanda
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 

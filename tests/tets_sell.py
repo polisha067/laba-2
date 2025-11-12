@@ -1,8 +1,8 @@
 #тест главной функции
 
 from pathlib import Path
-from unittest.mock import *
-from sell import *
+from unittest.mock import patch
+from src.sell import zapustit_obolochku
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 

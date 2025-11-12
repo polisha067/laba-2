@@ -4,7 +4,7 @@ import os
 import tempfile
 from pathlib import Path
 import sys
-from commands.cd import *
+from src.commands.cd import cd_komanda
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 

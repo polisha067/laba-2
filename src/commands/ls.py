@@ -21,26 +21,14 @@ def ls_komanda(argumenty):
     try:
         # преобразуем строку пути в Path
         put = Path(put_str).resolve()
-        
-        # проверка существования пути
-        if not put.exists():
-            soobsh = f"ls: {put_str}: нет такого файла или каталога"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
-        # проверяем директория ли
-        if not put.is_dir():
-            soobsh = f"ls: {put_str}: это не каталог"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
-        # gолучаем список файлов и папок в указанной директории
+
+        #получаем список файлов и папок в указанной дир
         spisok = os.listdir(put)
-        
-        # cортируем список
+
+        #сортируем список
         spisok.sort()
+
+    
         
         # выводим каждый элемент
         for imya_fayla in spisok:
@@ -74,6 +62,18 @@ def ls_komanda(argumenty):
         # логируем выполнение
         komanda_str = f"ls {' '.join(argumenty)}"
         zapisat_log(komanda_str)
+
+    except FileNotFoundError:
+
+        soobsh = f"ls: {put_str}: нет такого файла или каталога"
+        print(soobsh)
+        zapisat_fold(soobsh)
+        
+    except NotADirectoryError:
+        
+        soobsh = f"ls: {put_str}: это не каталог"
+        print(soobsh)
+        zapisat_fold(soobsh)
         
     except PermissionError:
     

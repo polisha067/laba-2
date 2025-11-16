@@ -21,44 +21,25 @@ def cat_komanda(argumenty):
         fayl = Path(fayl_str)
 
         fayl_absolyutny = fayl.resolve()
-        
-        # проверяем, что файл существует
-        if not fayl_absolyutny.exists():
-            soobsh = f"cat: {fayl_str}: нет такого файла или каталога"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
-        # проверяем, что это не директория
-        if fayl_absolyutny.is_dir():
-            soobsh = f"cat: {fayl_str}: это каталог"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
-        # проверяем, что это файл
-        if not fayl_absolyutny.is_file():
-            soobsh = f"cat: {fayl_str}: это не файл"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
 
-        try:
-            with open(fayl_absolyutny, 'r', encoding=FILE_ENCOD, errors='replace') as f:
-                soderzhimoe = f.read()
+            
+        with open(fayl_absolyutny, 'r', encoding=FILE_ENCOD, errors='replace') as f:
+            soderzhimoe = f.read()
 
-                print(soderzhimoe, end='')
+            print(soderzhimoe, end='')
 
-        except UnicodeDecodeError:
-
-            soobsh = f"cat: {fayl_str}: не удалось прочитать файл"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
         # логируем выполнение
         zapisat_log(f"cat {fayl_str}")
+    
+    except FileNotFoundError:
+        soobsh = f"cat: {fayl_str}: нет такого файла или каталога"
+        print(soobsh)
+        zapisat_fold(soobsh)
         
+    except IsADirectoryError:
+        soobsh = f"cat: {fayl_str}: это каталог"
+        print(soobsh)
+        zapisat_fold(soobsh)  
     except PermissionError:
 
         soobsh = f"cat: {fayl_str}: отказано в доступе"

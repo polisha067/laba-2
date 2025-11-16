@@ -20,31 +20,21 @@ def cp_komanda(argumenty):
         istochnik = Path(istochnik_str).resolve()
         naznachenie = Path(naznachenie_str)
         
-        # проверка существоваия источника
-        if not istochnik.exists():
-            soobsh = f"cp: {istochnik_str}: нет такого файла или каталога"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
         # если назначение - существующая директория, копируем в неё с исходным именем
         if naznachenie.exists() and naznachenie.is_dir():
-            # если источник - файл, копируем в директорию с тем же именем
-            if istochnik.is_file():
-                naznachenie = naznachenie / istochnik.name
-            # если источник - директория, копируем в директорию с тем же именем
-            elif istochnik.is_dir():
-                naznachenie = naznachenie / istochnik.name
+            naznachenie = naznachenie / istochnik.name
 
         naznachenie = naznachenie.resolve()
-        
+
         # проверяем, что не пытаемся скопировать директорию в саму себя
         if istochnik.is_dir() and naznachenie.exists():
-            if istochnik.samefile(naznachenie) or str(naznachenie).startswith(str(istochnik) + os.sep):
+            if str(naznachenie).startswith(str(istochnik) + os.sep):
                 soobsh = f"cp: {istochnik_str}: невозможно скопировать директорию в саму себя"
                 print(soobsh)
                 zapisat_fold(soobsh)
                 return
+
+        naznachenie = naznachenie.resolve()
         
         # копируем
         if istochnik.is_dir():
@@ -56,7 +46,14 @@ def cp_komanda(argumenty):
         
         # логируем выполнение
         zapisat_log(f"cp {istochnik_str} -> {naznachenie_str}")
-        
+    
+
+    except FileNotFoundError:
+        soobsh = f"cp: {istochnik_str}: нет такого файла или каталога"
+        print(soobsh)
+        zapisat_fold(soobsh)
+
+
     except PermissionError:
 
         soobsh = f"cp: отказано в доступе"

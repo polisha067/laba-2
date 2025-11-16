@@ -1,6 +1,7 @@
 # перемещает или переименовывает файл или директорию
 
 import shutil
+import os
 from pathlib import Path
 from loggg import zapisat_fold, zapisat_log
 
@@ -21,13 +22,7 @@ def mv_komanda(argumenty):
         istochnik = Path(istochnik_str).resolve()
         naznachenie = Path(naznachenie_str)
         
-        # проверяем, что источник существует
-        if not istochnik.exists():
-            soobsh = f"mv: {istochnik_str}: нет такого файла или каталога"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
+
         # если назначение - существующая директория, перемещаем в неё с исходным именем
         if naznachenie.exists() and naznachenie.is_dir():
             naznachenie = naznachenie / istochnik.name
@@ -46,6 +41,14 @@ def mv_komanda(argumenty):
         
         # логируем выполнение
         zapisat_log(f"mv {istochnik_str} -> {naznachenie_str}")
+        
+
+        
+    except FileNotFoundError:
+
+        soobsh = f"mv: {istochnik_str}: нет такого файла или каталога"
+        print(soobsh)
+        zapisat_fold(soobsh)
         
     except PermissionError:
 

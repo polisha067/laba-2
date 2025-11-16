@@ -33,12 +33,6 @@ def rm_komanda(argumenty):
                 zapisat_fold(soobsh)
                 return
         
-        # проверяем, что объект существует
-        if not put.exists():
-            soobsh = f"rm: {put_str}: нет такого файла или каталога"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
         
         # обрабатываем
         if put.is_dir():

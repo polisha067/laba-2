@@ -17,29 +17,25 @@ def cd_komanda(argumenty):
     try:
         # Раскрываем ~ в путь к домашней директории
         rasshirenny_put = os.path.expanduser(tsel_str)
+
+        #меняем текущую директорию
+        os.chdir(rasshirenny_put)
         
         # преобразуем в Path объект для проверки
-        tsel = Path(rasshirenny_put)
+        tsel = Path(rasshirenny_put).resolve()
+        zapisat_log(f"cd {tsel_str} -> {tsel}")
+
+    except FileNotFoundError:
+
+        soobsh = f"cd: {tsel_str}: нет такого файла или каталога"
+        print(soobsh)
+        zapisat_fold(soobsh)
         
-        # проверяем, что путь существует
-        if not tsel.exists():
-            soobsh = f"cd: {tsel_str}: нет такого файла или каталога"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
+    except NotADirectoryError:
         
-        # проверяем, что это директория
-        if not tsel.is_dir():
-            soobsh = f"cd: {tsel_str}: это не каталог"
-            print(soobsh)
-            zapisat_fold(soobsh)
-            return
-        
-        # меняем текущую директорию
-        os.chdir(tsel)
-        
-        # логируем выполнение
-        zapisat_log(f"cd {tsel_str} -> {tsel.resolve()}")
+        soobsh = f"cd: {tsel_str}: это не каталог"
+        print(soobsh)
+        zapisat_fold(soobsh)
         
     except PermissionError:
 
